@@ -11,7 +11,7 @@
 
 @endguest
 
-<a class="top-right-corner blue-btn" href="{{ route('leaderboard') }}">Leaderboard</a>
+{{-- <a class="top-right-corner blue-btn" href="{{ route('leaderboard') }}">Leaderboard</a> XXX --}}
 
 @auth
 <a class="bottom-right-corner red-btn" href="{{ route('logout') }}">Logout</a>
@@ -21,7 +21,7 @@
     <img src="{{ asset('images/mister_quiz.png') }}" alt="">
     <p class="title">Mister Quiz</p>
 
-    <a style="margin-bottom:20px" class="green-btn center" href="{{ route('quiz') }}">Start Quiz</a>
+    {{-- <a style="margin-bottom:20px" class="green-btn center" href="{{ route('quiz') }}">Start Quiz</a> XXX --}}
 </div>
 
 @endsection
