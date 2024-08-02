@@ -16,6 +16,13 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
+
+        //sign user in
+        $credentials = $request->only('username', 'password');
+        Auth::attempt($credentials);
+        
+
+        //redirect
         return redirect()->route('home');
     }
 }
