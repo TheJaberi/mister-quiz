@@ -33,6 +33,8 @@ Route::post('/profile', [ProfileController::class, 'update']);
 
 Route::GET('/quiz', [QuizController::class, 'page'])->name('quiz');
 
+Route::GET('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
+
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 

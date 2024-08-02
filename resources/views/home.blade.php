@@ -10,7 +10,7 @@
 
     @endguest
 
-    {{-- <a class="top-right-corner blue-btn" href="{{ route('leaderboard') }}">Leaderboard</a> XXX --}}
+    <a class="top-right-corner blue-btn" href="{{ route('leaderboard') }}">Leaderboard</a> XXX
 
     @auth
         <a class="bottom-right-corner red-btn" href="{{ route('logout') }}">Logout</a>
