@@ -13,24 +13,24 @@
         @csrf
 
         <div class="mb4">
-            <input class="auth-input center" type="text" name="email" id="email" placeholder="Enter email" value="{{ old('email')}}">
+            <input class="auth-input center" type="text" name="loginID" id="email" placeholder="Enter email or username" value="{{ old('loginID')}}">
 
-            @error('email')
+            {{-- @error('email')
             <div class="center error-msg mt2">
                 {{ $message }}
             </div>
-            @enderror
+            @enderror --}}
         </div>
 
         <div class="mb4">
             <input class="auth-input center" type="password" name="password" id="password" placeholder="Enter password">
-
-            @error('password')
-            <div class="center error-msg mt2">
-                {{ $message }}
-            </div>
-            @enderror
         </div>
+        
+        @error('invalid')
+        <div class="center error-msg mt2">
+            {{ $message }}
+        </div>
+        @enderror
 
         <button class="center green-btn mb4" style="cursor: pointer;" type="submit">Login</button>
         @if (session('status'))
