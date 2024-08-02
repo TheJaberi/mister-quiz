@@ -29,10 +29,11 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-Route::post('/profile', [ProfileController::class, 'update']);
 
 Route::middleware([Authenticate::class])->group(function (){
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile', [ProfileController::class, 'update']);
+    
     Route::GET('/quiz', [QuizController::class, 'page'])->name('quiz');
 });
 
