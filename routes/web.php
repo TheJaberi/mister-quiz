@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\Questions\QuestionController;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,9 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('/profile', [ProfileController::class, 'update']);
 
-Route::GET('/quiz', [QuizController::class, 'page'])->name('quiz');
+Route::middleware([Authenticate::class])->group(function (){
+    Route::GET('/quiz', [QuizController::class, 'page'])->name('quiz');
+});
 
 Route::GET('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
 
