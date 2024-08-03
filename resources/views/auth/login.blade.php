@@ -13,7 +13,7 @@
         @csrf
 
         <div class="mb4">
-            <input class="auth-input center" type="text" name="loginID" id="email" placeholder="Enter email or username" value="{{ old('loginID')}}">
+            <input class="auth-input center" type="text" name="email" id="email" placeholder="Enter email or username" value="{{ old('email')}}">
 
             {{-- @error('email')
             <div class="center error-msg mt2">

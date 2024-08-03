@@ -20,22 +20,21 @@ class LoginController extends Controller
     {
 
         //sign user in
-        $credentials = $request->only('loginID', 'password');
-        
-        $success = Auth::attempt($credentials);
+        $credentials = $request->only('email', 'password');
 
         // attempt only checks with email, pwd. so i manually check the username/password combination
-        if ($success){
+        if (Auth::attempt($credentials)) {
             return redirect()->route('home');
-        } else {
-            
-            $user = User::where('username', $credentials['loginID'])->first();
-            if ($user && Hash::check($credentials['password'], $user->password)){
-                Auth::login($user);
-                return redirect()->route('home');
-            }
-
         }
+
+
+        $user = User::where('username', $credentials['email'])->first();
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            Auth::login($user);
+            return redirect()->route('home');
+        }
+
+
 
         // If it reaches here, means user with credentials not found. Throw error back to the blade template
         throw ValidationException::withMessages([
