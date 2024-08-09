@@ -39,13 +39,15 @@ class QuizController extends Controller
             'questions' => $questions
         ]);
     }
-    public function store(Request $questions)
+    public function store(Request $request)
     {
-        $data = $questions->all();
+        $questions = $request->all();
+
         $score = 0;
-        foreach ($data as $questionId => $answerId) {
-            $question = Question::find($questionId);
-            if ($question->correct_answer_id == $answerId) {
+        foreach ($questions as $question) {
+            ddd($question);
+            $answer = Answer::find($question['answer']);
+            if ($answer->correct) {
                 $score++;
             }
         }
@@ -53,6 +55,6 @@ class QuizController extends Controller
         $quiz->score = $score;
         $quiz->completed = true;
         $quiz->save();
-        return redirect()->route('home');
+        return redirect()->route('leaderboard');
     }
 }
