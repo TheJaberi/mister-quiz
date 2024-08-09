@@ -16,7 +16,7 @@ class QuestionQuiz extends Migration
         Schema::create('question_quiz', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quizzes_id')->references('id')->on('quizzes');
-            $table->foreignId('question_id')->references('id')->on('questions');
+            $table->foreignId('question_id')->references('id')->on('question');
             $table->timestamps();
         });
     }
