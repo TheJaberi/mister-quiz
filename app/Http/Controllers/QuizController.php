@@ -53,6 +53,7 @@ class QuizController extends Controller
 
 
         return view('questions/list', [
+            'quiz_id' => $quiz->id,
             'questions' => $questions
         ]);
     }
@@ -66,7 +67,15 @@ class QuizController extends Controller
             ]);
         }
 
-        $score = 0;
+        $results = [
+            'art' => 0,
+            'history' => 0,
+            'geography' => 0,
+            'science' => 0,
+            'sports' => 0,
+            'overall' => 0
+        ];    
+
         $user = User::find(auth()->user()->id);
         $artScore = explode('/', $user->art);
         $historyScore = explode('/', $user->history);
@@ -79,6 +88,7 @@ class QuizController extends Controller
                 $question = Question::find($questionId);
                 if ($answer->correct) {
                     $point = 1;
+                    $results['overall']++;
                 } else {
                     $point = 0;
                 }
@@ -86,18 +96,23 @@ class QuizController extends Controller
                 if ($category == 'Art') {
                     $artScore[0] += $point;
                     $artScore[1] += 1;
+                    $results['art'] += $point;
                 } elseif ($category == 'History') {
                     $historyScore[0] += $point;
                     $historyScore[1] += 1;
+                    $results['history'] += $point;
                 } elseif ($category == 'Geography') {
                     $geographyScore[0] += $point;
                     $geographyScore[1] += 1;
+                    $results['geography'] += $point;
                 } elseif ($category == 'Science') {
                     $scienceScore[0] += $point;
                     $scienceScore[1] += 1;
+                    $results['science'] += $point;
                 } elseif ($category == 'Sports') {
                     $sportsScore[0] += $point;
                     $sportsScore[1] += 1;
+                    $results['sports'] += $point;
                 }
                 
                 $user->xp += $question->xp;
@@ -110,12 +125,11 @@ class QuizController extends Controller
         $user->geography = implode('/', $geographyScore);
         $user->science = implode('/', $scienceScore);
         $user->sports = implode('/', $sportsScore);
-
-
         $user->save();
-        $quiz = Quiz::where('user_id', auth()->user()->id)->first();
+
+        $quiz = Quiz::where('id', $request->id)->first();
         $quiz->completed = true;
         $quiz->save();
-        return redirect()->route('leaderboard');
+        return redirect()->route('results')->with('results', $results);
     }
 }
