@@ -16,6 +16,7 @@
                 @foreach ($questions as $question)
                     <x-question :question="$question" />
                 @endforeach
+                <input type="hidden" name="id" value={{ $quiz_id }}>
             </div>
         @endif
         <button type="submit" class="center green-btn">Submit</button>
