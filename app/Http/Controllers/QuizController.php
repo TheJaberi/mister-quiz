@@ -8,6 +8,7 @@ use App\Models\Question_Quiz;
 use App\Models\User;
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class QuizController extends Controller
 {
@@ -58,7 +59,13 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $questions = $request->answers;
-        // ddd($questions);
+        
+        if (empty($questions) || count($questions) != 10 ){
+            throw ValidationException::withMessages([
+                'error' => 'Answers all questions before submitting.'
+            ]);
+        }
+
         $score = 0;
         $user = User::find(auth()->user()->id);
         $artScore = explode('/', $user->art);
