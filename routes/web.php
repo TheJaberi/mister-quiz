@@ -35,6 +35,7 @@ Route::middleware([Authenticate::class])->group(function (){
     Route::post('/profile', [ProfileController::class, 'update']);
     
     Route::GET('/quiz', [QuizController::class, 'page'])->name('quiz');
+    Route::POST('/quiz', [QuizController::class, 'store'])->name('storeQuiz');
 });
 
 Route::GET('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
