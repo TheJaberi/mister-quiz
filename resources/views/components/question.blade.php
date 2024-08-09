@@ -13,5 +13,5 @@
         @endforeach
 
 
-        <div class="center line"></div>
     </div>
+</div>
