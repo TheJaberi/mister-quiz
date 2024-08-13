@@ -9,6 +9,7 @@
                 <tr>
                     <th style="border: 1px solid blue; padding: 8px; color:aqua">Rank</th>
                     <th style="border: 1px solid blue; padding: 8px; color:aqua">Username</th>
+                    <th style="border: 1px solid blue; padding: 8px; color:aqua">Correct Answers Submitted</th>
                     <th style="border: 1px solid blue; padding: 8px; color:aqua">XP</th>
                     <th style="border: 1px solid blue; padding: 8px; color:aqua">Rank Title</th>
                 </tr>
@@ -21,10 +22,12 @@
                         $historyscore = $user->history;
                         $sciencescore = $user->science;
                         $sportscore = $user->sports;
+                        $total = explode("/", $geographyscore)[0] +  explode("/", $historyscore)[0] +  explode("/", $sciencescore)[0] + explode("/", $sportscore)[0] ;
                     @endphp
                     <tr>
                         <td style="border: 1px solid blue; padding: 8px;">{{ $index + 1 }}</td>
                         <td style="border: 1px solid blue; padding: 8px;">{{ $user->username }}</td>
+                        <td style="border: 1px solid blue; padding: 8px;">{{ $total }}</td>
                         <td style="border: 1px solid blue; padding: 8px;">{{ $userxp }} XP</td>
                         <td style="border: 1px solid blue; padding: 8px;">
                             @if ($userxp < 1500)
