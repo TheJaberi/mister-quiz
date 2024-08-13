@@ -90,6 +90,7 @@ class QuizController extends Controller
                     $point = 1;
                     $results['overall']++;
                     $user->xp += $question->xp;
+
                 } else {
                     $point = 0;
                 }
@@ -116,6 +117,7 @@ class QuizController extends Controller
                     $results['sports'] += $point;
                 }
                 
+
 
             }
         }
